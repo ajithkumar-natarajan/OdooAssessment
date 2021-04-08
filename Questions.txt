@@ -1,0 +1,156 @@
+****** IMPORTANT READ FOLLOWING NOTE BEFORE STARTING ******
+
+This challenge is divided into three sections (Backend/FrontEnd/Database layers) to test different skill sets of the full-stack engineer’s 
+You will have 2 Hours 30 Minutes (150 Minutes) to finish the challenges once stated. You will keep track of time yourself and stop working at the end of your time window
+When you finish the challenge challenges, close this tab and reply to the email containing this link, to indicate that you have finished your challenges and this is ready for review.
+All the changes are auto-saved so not worry about saving them.
+You can skip the problem that you do not know or do not have the answer.
+We are not expecting everyone to excel in all areas of this challenge 
+You can test your code by running on your machine or internet editors to make sure it works as you are expecting.
+Don't hesitate to add comments to your answers.
+Please do not modify the questions.
+
+
+Backend Programming Challange (Solution can be written in any programming language you prefer)
+========================================
+Problem 1:
+Given an amount in dollars and a tax percentage. Return an array with the tax amount in cents.
+// Code is in Java
+
+private static double[] getTaxAmount(double amount, double taxPercentage){
+    double[] taxAmountInCents = new double[1];
+    taxAmountInCents[0] = amount*taxPercentage; // Not dividing by 100 even though it is percentage since the return value has to be in cents.
+
+    return taxAmountInCents;
+}
+
+Problem 2:
+Given the deck ['A',1,2,3,4,5,6,7,8,9,10,'J','K','Q'], write a function that shuffles the deck using the randint function. 
+The random module includes a basic function randint(a, b) that returns a uniformly random integer from a to b (including both endpoints). 
+# Code is in Python
+
+import random
+
+inputDeck =  ['A',1,2,3,4,5,6,7,8,9,10,'J','K','Q']
+random.shuffle(inputDeck)
+
+return inputDeck
+
+Example: 
+Input deck = ['A',1,2,3,4,5,6,7,8,9,10,'J','K','Q'].
+Output = ['Q',K,2,3,4,5,6,7,8,9,10,'1','A','J'] or can be in any shuffled order
+
+Problem 3:
+Given a string s, return the sum of the vowels in the string if each vowel's weight increases by 1 according to the vowels order. 
+// Since in the example given below, uppercase 'I' in Indonesia has been been counted in the answer, I have assumed that only lowercase characters should be considered.
+// Code is in Java.
+
+import java.util.Map;
+import java.util.HashMap;
+
+private int getVowelsWeight(String inputString){
+    char[] inputCharacters = inputString.toCharArray();
+    Map<Character, Integer> weightMap = new HashMap<>();
+    Map<Character, Integer> countMap = new HashMap<>();
+    int vowelsWeight = 0;
+
+    weightMap.put('a', 1);
+    weightMap.put('e', 2);
+    weightMap.put('i', 3);
+    weightMap.put('o', 4);
+    weightMap.put('u', 5);
+
+
+    for(char c: inputCharacters){
+      if(weightMap.containsKey(c))
+        countMap.put(c, countMap.getOrDefault(c, 0)+1);
+    }
+
+    for(Map.Entry<Character, Integer> entry: countMap.entrySet()){
+      vowelsWeight += entry.getValue()*weightMap.get(entry.getKey());
+    }
+
+    return vowelsWeight;    
+}
+
+Example:  
+Input=  s: "Welcome to Indonesia", Vowels weight: a = 1, e = 2, i = 3, o = 4, u = 5  
+Output = 22 (1 a's = 1*1 = 1 +  3 e's = 3*2 = 6 +  1 i's = 1*3 = 3 + 3 o's = 3*4 = 12)
+
+
+Problem 4:
+Write a recursive version of the previous function (or an iterative version if you already did a recursive version).
+// Since in the example given above, uppercase 'I' in Indonesia has been been counted in the answer, I have assumed that only lowercase characters should be considered.
+// Code is in Java.
+
+import java.util.Map;
+import java.util.HashMap;
+
+class Q4 {
+
+  static Map<Character, Integer> weightMap;
+  static Map<Character, Integer> countMap;
+
+  public static void main(String[] args) {
+    String input = "Welcome to Indonesia";
+    weightMap = new HashMap<>();
+    countMap = new HashMap<>();
+    char[] inputCharacters = input.toCharArray();
+    int vowelsWeight = 0;
+
+    weightMap.put('a', 1);
+    weightMap.put('e', 2);
+    weightMap.put('i', 3);
+    weightMap.put('o', 4);
+    weightMap.put('u', 5);
+
+    System.out.println(getVowelsWeight(inputCharacters, vowelsWeight, 0));
+  }
+
+  private static int getVowelsWeight(char[] inputCharacters, int vowelsWeight, int position){
+    if(position < inputCharacters.length){
+      if(weightMap.containsKey(inputCharacters[position])){
+        char ch = inputCharacters[position];
+        countMap.put(ch, countMap.getOrDefault(ch, 0)+1);
+      }
+      getVowelsWeight(inputCharacters, vowelsWeight, position+1);
+    }
+    for(Map.Entry<Character, Integer> entry: countMap.entrySet())
+      vowelsWeight += entry.getValue()*weightMap.get(entry.getKey());
+
+    return vowelsWeight;    
+  }
+}
+
+Problem 5:
+Write a regular expression to find any word between 4 and 9 letters long and containing either “odoo”, “code” or “work”?
+
+
+
+FrontEnd Challange (JS/TS/CSS)
+========================================
+
+Problem 6:
+https://gist.github.com/sna-odoo/70229f8bc4c3a232324b3c70ca9d2e6b
+Create a 3*3 box using flex property, For each box it should display zero as the count in the center
+
+Problem 7:
+Extend the above feature by implementing the counter feature, the count has to be incremented only for the clicked box .
+
+Problem 8:
+Extend the above feature by creating a "click here" button and upon clicking the button the count of all the boxes has to increment by 1 with 1 second gap for each increment.
+
+Problem 9:
+Find count of 'odoo.sh' word in all sections of https://www.odoo.sh/faq webpage including collapsible divs using jquery.
+
+
+Database Challange (SQL)
+========================================
+
+Problem 10:
+Write SQL statements to create database tables to store the details of users  of a basic ecommerce website.
+10.1) Each user has a first name, last name, address and city id to store parent reference . City table has id and name column.
+
+With the Fact that these tables are populated with 10000 users and 30 cities.
+10.2) Write a SQL query to find cities with highest number of users and reutrn city id,name and number users in descending order.
+10.3) How would you populate the tables with ramdon test datas for a tables created at problem 1.
